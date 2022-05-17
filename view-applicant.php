@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<?php
+require_once './includes/init.php';
+
+$id = $session->getuserid();
+$user = User::find_by_id($id);
+?>
+<html>
+    <head>
+        <?php
+        include './spinoffs/head.php';
+        ?>
+    </head>
+    <body>
+        <div style="width:100%; height: 833px;">
+
+            <?php
+            $clientid = filter_input(INPUT_GET, "clientid", FILTER_VALIDATE_INT);
+            $client = ApplicantProfile::find_by_id($clientid);
+            ?>
+
+            <!-- HEADER -->
+            <div style="width: 100%; float: left">
+                <?php
+                include './spinoffs/header-admin.php';
+                ?>
+            </div>
+
+            <!-- SIDE-BAR -->
+            <div id="side-bar" style="float: left; height: 100%">
+                <?php
+                include './spinoffs/admin-sidebar.php';
+                ?>
+            </div>
+
+            <!-- CONTENT -->
+            <div id="content" style="float: left; width: 1116px; height:627px; overflow-y: auto">
+                <!-- CONTENT-TOP -->
+                <div class="p-3">
+                    <h2 style="border-bottom: 1px solid gray; margin-bottom: 50px;">Applicant <?php echo $client->id; ?></h2>
+                    <?php
+                    $cuser = User::find_by_id($client->userid);
+                    ?>
+                    <table class="table" style="width: 60%">
+                        <tr>
+                            <td>Name</td>
+                            <td>:</td>
+                            <td><?php echo $cuser->name; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td><?php echo $cuser->emailadd; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number</td>
+                            <td>:</td>
+                            <td><?php echo $client->user_contact; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Sex</td>
+                            <td>:</td>
+                            <td><?php echo $client->gender; ?></td>
+                        </tr>
+                        <tr>
+                            <td>No. of experience</td>
+                            <td>:</td>
+                            <td><?php echo $client->experience; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Highest Educational Attainment</td>
+                            <td>:</td>
+                            <td><?php echo $client->educ_attainment; ?></td>
+                        </tr>
+                        <tr>
+                            <td>File Uploaded</td>
+                            <td>:</td>
+                            <td>
+                                <a href="uploads/<?php echo $client->file_name; ?>" download><?php echo $client->file_name ?></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Application Status</td>
+                            <td>:</td>
+                            <td><?php echo $client->statusvalue[$client->status]; ?></td>
+                        </tr>
+                    </table>
+                    <div style=" padding-right: 20px">
+                        <?php
+                        if ($client->status == 40) {
+                            
+                        } else {
+                        ?>
+                        <div class="col-8 col-sm-3">
+                            <?php if ($client->status != 100) { ?>
+                                <a href="upload_application.php?clientid=<?php echo $client->id; ?>&status=reject" class="btn btn-sm btn-danger delete_product" data-id="<?php echo $client->id; ?>">Reject Application</a>
+                            <?php } ?>
+                        </div>
+                        <div class="col-8 col-sm-3">
+                            <form action="upload_application.php" method="post" class="row align-items-end">
+                                <?php if ($client->status == 10) { ?>
+                                    <a class="btn btn-sm btn-success" href="schedule_interview.php?clientid=<?php echo $client->id ?>&status=initial">Schedule for Initial Interview</a>
+                                <?php } elseif ($client->status == 20) {
+                                    ?>
+                                    <a class="btn btn-sm btn-success"  href="schedule_interview.php?clientid=<?php echo $client->id ?>&status=final">Schedule for Final Interview</a>
+                                <?php } elseif ($client->status == 30) {
+                                    ?>
+                                    <a class="btn btn-sm btn-success" href="upload_application.php?status=hired&clientid=<?php echo $client->id ?>">HIRE APPLICANT</a>
+                                <?php }
+                                ?>
+                            </form>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <!-- CONTENT-BOTTOM / FOOTER -->
+                <div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <script src="./public/jquery.min.js"></script>
+        <script src="./public/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./public/sweet_alert/sweetalert2.min.js"></script>
+        <script src="./public/sweetalert.js"></script>
+
+    </body>
+</html>
