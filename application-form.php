@@ -58,8 +58,7 @@ require_once './includes/init.php';
                                     <input type="text" name="user_address" class="form-control" placeholder="Home Address" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="number" name="user_contact" maxlength = "11" 
-                                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" placeholder="Phone Number" required>
+                                    <input type="tel" class="form-control" placeholder="Phone Number (format: 09********)" pattern="[0-9]{11}" onkeyup="numbersOnly(this)" required>
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-check-inline">
@@ -98,7 +97,7 @@ require_once './includes/init.php';
                                     </select>
                                 </div>
                                 <div class="mb-3 justify-content-center align-items-center">
-                                    <input class="form-control float-start hidden" name="file" type="file" id="formFile" placeholder="Upload CV" required>
+                                    <input class="form-control float-start hidden" name="file" type="file" id="formFile" accept=".pdf" placeholder="Upload CV" required>
                                     <br><a class="fs-6 text-decoration-none text-muted">.pdf file type only</a>
                                 </div>
                                 <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -141,9 +140,9 @@ require_once './includes/init.php';
             </footer>
         </div>
         <script>
-            function myFunction(bday) {
-                var input1 = document.getElementById("daybirth");
-                input1.value = bday;
+            function numbersOnly(input) {
+                var number = /[^0-9]/gi;
+                input.value = input.value.replace(number, "");
             }
         </script>
     </body>

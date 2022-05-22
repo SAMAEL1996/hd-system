@@ -21,8 +21,8 @@ class Job {
         return $query;
     }
     
-    public static function find_all_users() {
-        $query = self::find_by_sql("select * from " . self::$tablename . " where usertype not in ( 20 )");
+    public static function find_all_active() {
+        $query = self::find_by_sql("select * from " . self::$tablename . " where status = 10");
         return $query;
     }
 
@@ -39,9 +39,9 @@ class Job {
     }
     
   
-    public static function find_by_email($emailadd = "") {
+    public static function find_by_job($job = "", $title = "") {
         global $database;
-        $query = self::find_by_sql("SELECT * FROM " . self::$tablename . " where emailadd = '" . $database->escape_value($emailadd) . "' LIMIT 1");
+        $query = self::find_by_sql("SELECT * FROM " . self::$tablename . " where job = '" . $database->escape_value($job) . "' AND title = '" . $database->escape_value($title) . "' LIMIT 1");
         return !empty($query) ? array_shift($query) : false;
     }
     

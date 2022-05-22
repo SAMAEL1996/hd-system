@@ -2,6 +2,12 @@
 
 require_once './includes/init.php';
 
+include("vendor/autoload.php");
+
+use \ConvertApi\ConvertApi;
+
+ConvertApi::setApiSecret('KlnyBgyQylCoblzT');
+
 // clint save profile
 $submitprofile = filter_input(INPUT_POST, "submitprofile", FILTER_SANITIZE_STRING);
 if (isset($submitprofile)) {
@@ -15,10 +21,12 @@ if (isset($submitprofile)) {
     $birthdate = filter_input(INPUT_POST, "birthdate", FILTER_SANITIZE_STRING);
     $cover_letter = filter_input(INPUT_POST, "cover_letter", FILTER_SANITIZE_STRING);
     $filename = $_FILES['file']['name'];
+    
+    $user = User::find_by_id($userid);
 
     //upload file
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    $allowed = ['pdf', 'txt', 'doc', 'docx', 'png', 'jpg', 'jpeg', 'gif'];
+    $allowed = ['pdf'];
 
     //check if file type is valid
     if (in_array($ext, $allowed)) {
@@ -26,6 +34,16 @@ if (isset($submitprofile)) {
         $path = 'uploads/';
 
         move_uploaded_file($_FILES['file']['tmp_name'], ($path . $filename));
+        $result = ConvertApi::convert(
+                'png', [
+            'File' => $path . $filename,
+                ], 'pdf'
+        );
+        $contents = $result->getFile()->getContents();
+        $output = "converted_files/" . $user->name . ".png";
+        $fopen = fopen($output, "w");
+        fwrite($fopen, $contents);
+        fclose($fopen);
 
         // insert file details into database
         $profile = new ApplicantProfile();
@@ -48,7 +66,7 @@ if (isset($submitprofile)) {
             redirect_to_root("client-page.php?msg=$msg");
         }
     } else {
-        redirect_to_root("client-page.php");
+        redirect_to_root("application-form.php?jobid=$jobid");
     }
 }
 
@@ -164,13 +182,19 @@ if (isset($submitjob)) {
     $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
     $jobDesc = $description;
 
-    $jobOpen = new Job();
-    $jobOpen->job = $job;
-    $jobOpen->title = $title;
-    $jobOpen->description = $jobDesc;
-    $jobOpen->status = 10;
-    $jobOpen->date_created = date("Y-m-d H:i:s");
-    if ($jobOpen->create()) {
-        redirect_to_root("job_open.php");
+    $existJob = Job::find_by_job($job);
+    if (!empty($existJob)) {
+        $jobOpen = new Job();
+        $jobOpen->job = $job;
+        $jobOpen->title = $title;
+        $jobOpen->description = $jobDesc;
+        $jobOpen->status = 10;
+        $jobOpen->date_created = date("Y-m-d H:i:s");
+        if ($jobOpen->create()) {
+            redirect_to_root("job_open.php");
+        }
+    } else {
+        $error = "Input job already exist!";
+        redirect_to_root("form.php?error=$error");
     }
 }

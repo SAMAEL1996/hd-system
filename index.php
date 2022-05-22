@@ -79,7 +79,7 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="card mx-auto" style="width: 25rem;">
+                    <div class="card mx-auto" style="width: 25rem">
                         <img src="./public/images/mwfblogo.jpg" class="card-img-top">
                     </div>
                 </div>

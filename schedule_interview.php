@@ -119,5 +119,18 @@ $user = User::find_by_id($id);
             </div>
 
         </div>
+        <script>
+            var today = new Date().toISOString().slice(0, 16);
+            document.getElementsByName("sched_date")[0].min = today;
+//            $(function () {
+//                var dtToday = new Date();
+//
+//                var month = dtToday.getMonth() + 1;
+//                var day = dtToday.getDate();
+//                var year = dtToday.getFullYear();
+//
+//                $('#txtDate').attr('min', maxDate);
+//            });
+            </script>
     </body>
 </html>

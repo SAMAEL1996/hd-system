@@ -10,7 +10,7 @@ if (isset($verifycode)) {
     $user = ResetPassword::authenticateCode($email, $code);
     if($user == true) {
         $authenticate = true;
-        redirect_to_root("createNewPass.php?authenticate=$authenticate");
+        redirect_to_root("createNewPass.php?authenticate=$authenticate&emailadd=$email");
     } else {
         $errorauth = "Verification code failed. Email and code not verify.";
         redirect_to_root("reset-password.php?errorauth=$errorauth");

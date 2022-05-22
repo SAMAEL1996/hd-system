@@ -22,10 +22,8 @@ if (isset($register)) {
             $pwcr12 = substr($pwcr2, 2);
             $user->password = $pwcr12;
             $random_number = rand(100000, 999999);
-            $iduser = "CL" . $random_number;
             $usertype = 20;
             $user->usertype = $usertype;
-            $user->iduser = $iduser;
             $user->recadddate = date("Y-m-d H:i:s");
             if ($user->create()) {
                 $successreg = "Signup successful.";
@@ -47,9 +45,8 @@ if (isset($resetpassword)) {
     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
     $password_confirmation = filter_input(INPUT_POST, "password_confirmation", FILTER_SANITIZE_STRING);
 
-    $sql = "select * from useraccounts where emailadd='" . $email . "'";
-    $users = User::find_by_sql($sql);
-    if (!empty($users)) {
+    $user = User::find_by_email($email);
+    if (!empty($user)) {
         // User exist
         if ($password == $password_confirmation) {
             $pwsh2 = sha1($password);

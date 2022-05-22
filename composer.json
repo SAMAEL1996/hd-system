@@ -1,6 +1,7 @@
 {
     "require": {
         "smalot/pdfparser": "^2.2",
-        "phpmailer/phpmailer": "^6.6"
+        "phpmailer/phpmailer": "^6.6",
+        "convertapi/convertapi-php": "^1.5"
     }
 }

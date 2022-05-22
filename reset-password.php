@@ -19,6 +19,7 @@ require_once './includes/init.php';
         ?>
 
         <?php
+        $emailadd = filter_input(INPUT_GET, "emailadd", FILTER_SANITIZE_EMAIL);
         $successreg = filter_input(INPUT_GET, "successreg", FILTER_SANITIZE_STRING);
         $errorlogin = filter_input(INPUT_GET, "errorlogin", FILTER_SANITIZE_STRING);
         $errorauth = filter_input(INPUT_GET, "errorauth", FILTER_SANITIZE_STRING);
@@ -120,9 +121,8 @@ require_once './includes/init.php';
                                 <?php } elseif ($errorauth || $successreg) { ?>
                                     <form method="POST" action="verify-code.php">
                                         <div class="row mb-3">
-                                            <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
                                             <div class="col-md-6">
-                                                <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus>
+                                                <input id="email" type="hidden" class="form-control" name="email" value="<?php echo $emailadd; ?>" autocomplete="email" autofocus>
                                             </div>
                                         </div>
 

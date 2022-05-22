@@ -90,19 +90,14 @@ $user = User::find_by_id($id);
                             <td><?php echo $client->statusvalue[$client->status]; ?></td>
                         </tr>
                     </table>
-                    <div style=" padding-right: 20px">
+
+                    <div class="d-grid gap-2 col-8 mx-auto">
                         <?php
                         if ($client->status == 40) {
                             
                         } else {
-                        ?>
-                        <div class="col-8 col-sm-3">
-                            <?php if ($client->status != 100) { ?>
-                                <a href="upload_application.php?clientid=<?php echo $client->id; ?>&status=reject" class="btn btn-sm btn-danger delete_product" data-id="<?php echo $client->id; ?>">Reject Application</a>
-                            <?php } ?>
-                        </div>
-                        <div class="col-8 col-sm-3">
-                            <form action="upload_application.php" method="post" class="row align-items-end">
+                            ?>
+                            <form action="upload_application.php" method="post" class="row align-items-start">
                                 <?php if ($client->status == 10) { ?>
                                     <a class="btn btn-sm btn-success" href="schedule_interview.php?clientid=<?php echo $client->id ?>&status=initial">Schedule for Initial Interview</a>
                                 <?php } elseif ($client->status == 20) {
@@ -113,8 +108,10 @@ $user = User::find_by_id($id);
                                     <a class="btn btn-sm btn-success" href="upload_application.php?status=hired&clientid=<?php echo $client->id ?>">HIRE APPLICANT</a>
                                 <?php }
                                 ?>
+                                <?php if ($client->status != 100) { ?>
+                                    <br><br><a href="upload_application.php?clientid=<?php echo $client->id; ?>&status=reject" class="btn btn-sm btn-danger delete_product" data-id="<?php echo $client->id; ?>">Reject Application</a>
+                                <?php } ?>
                             </form>
-                        </div>
                         <?php } ?>
                     </div>
                 </div>

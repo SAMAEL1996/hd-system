@@ -4,10 +4,9 @@ require_once 'init.php';
 
 class User {
     protected static $tablename = "useraccounts";
-    protected static $db_fields = array('userid', 'name', 'iduser', 'usertype', 'emailadd', 'password', 'gender', 'age', 'birthday', 'mobileno', 'address', 'recadddate');
+    protected static $db_fields = array('userid', 'name', 'usertype', 'emailadd', 'password', 'gender', 'age', 'birthday', 'mobileno', 'address', 'recadddate');
     public $userid;
     public $name;
-    public $iduser;
     public $usertype;
     public $emailadd;
     public $password;

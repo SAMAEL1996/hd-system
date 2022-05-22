@@ -27,10 +27,9 @@ require_once './includes/init.php';
 
         <?php
         $msg = filter_input(INPUT_GET, "msg", FILTER_SANITIZE_STRING);
-
         ?>
 
-        <div class="container pt-3">
+        <div class="container pt-3" style="text-transform:uppercase;">
             <?php
             $client = ApplicantProfile::find_by_userid($user->userid);
             if (empty($client)) {
@@ -38,28 +37,29 @@ require_once './includes/init.php';
                 Application status: <span class="text-danger">*No applications yet.</span>
                 <?php
             } else {
+                $sched = Schedule::find_by_clientid($client->id);
                 ?>
-                YOUR APPLICATION STATUS:
+                YOUR APPLICATION STATUS: <br>
                 <?php
                 if ($client->status == 10) {
                     ?>
-                    <span class="text-primary">Application submitted. Please wait for company's response.</span>
+                    <span class="text-primary ms-5">Application submitted. Please wait for company's response.</span>
                     <?php
                 } elseif ($client->status == 20) {
                     ?>
-                    <span class="text-primary">FOR INITIAL INTERVIEW</span>
+                    <span class="text-primary ms-5">FOR INITIAL INTERVIEW</span> @ <?php echo date("F j, Y, g:i a", strtotime($sched->sched_date)); ?>
                     <?php
                 } elseif ($client->status == 30) {
                     ?>
-                    <span class="text-primary">FOR FINAL INTERVIEW</span>
+                    <span class="text-primary ms-5">FOR FINAL INTERVIEW</span> @ <?php echo date("F j, Y, g:i a", strtotime($sched->sched_date)); ?>
                     <?php
                 } elseif ($client->status == 40) {
                     ?>
-                    <span class="text-success">HIRED</span>
+                    <span class="text-success ms-5">HIRED</span>
                     <?php
                 } elseif ($client->status == 100) {
                     ?>
-                    <span class="text-primary">APPLICATION REJECTED</span>
+                    <span class="text-primary ms-5">APPLICATION REJECTED</span>
                     <?php
                 }
                 ?>
@@ -75,7 +75,17 @@ require_once './includes/init.php';
         </div>
 
         <?php
-        $jobs = Job::find_all();
+        $jobs = Job::find_all_active();
+        if(empty($jobs)) { ?>
+            <div class="container pt-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        NO JOB VACANCY
+                    </div>
+                </div>
+            </div>
+        <?php }
+        
         foreach ($jobs as $job) {
             ?>
             <div class="container pt-3">
@@ -85,10 +95,17 @@ require_once './includes/init.php';
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $job->title; ?></h5>
-                        <p class="card-text"><?php echo nl2br($job->description); ?></p>
-                        <?php if ($client->jobid == $job->id) { ?>
+                        <input type="checkbox" name="showDesc" class="btn-check" id="btncheck2" autocomplete="off">
+                        <label class="btn btn-outline-dark btn-sm" for="btncheck2">Show Job Description</label>
+                        <div id="job-description" style="display: none">
+                            <p class="card-text"><?php echo nl2br($job->description); ?></p>
+                        </div>
+                        <?php if (empty($client->jobid)) { ?>
+                            <a href="application-form.php?jobid=<?php echo $job->id; ?>" class="btn btn-outline-dark col-md-4 ms-4">Apply Now</a>
+                        <?php } elseif ($client->jobid == $job->id) {
+                            ?>
                             <h3 class="card-text text-info fs-4">YOUR APPLICATION IS SUBMITTED</h3>
-                        <?php } else {?>
+                        <?php } else { ?>
                             <?php if ($job->status == 20) { ?>
                                 <h3 class="card-text text-danger fs-4">CLOSED APPLICATION</h3>
                             <?php } else { ?>
@@ -104,7 +121,7 @@ require_once './includes/init.php';
         <?php } ?>
 
         <!--FOOTER-->
-        <div class="container pt-0" style="background-color: white">
+<!--        <div class="container pt-0" style="background-color: white">
             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="facebook" viewBox="0 0 16 16">
                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -127,7 +144,18 @@ require_once './includes/init.php';
                     <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
                 </ul>
             </footer>
-        </div>
+        </div>-->
         <script src="./public/js/fadeDIV.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('input[name="showDesc"]').change(function() {
+                    if($(this).is(":checked")) {
+                        $('#job-description').show();
+                    } else {
+                        $('#job-description').hide();
+                    }
+                })
+            })
+        </script>
     </body>
 </html>

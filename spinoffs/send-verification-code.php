@@ -64,14 +64,22 @@ if (isset($sendcode)) {
             $mail->send();
             // echo 'Message has been sent';
             // insert in users table
-            $reset = new ResetPassword();
-            $reset->email = $email;
-            $reset->verification_code = $verification_code;
-            $reset->created_at = date("Y-m-d H:i:s");
-            $reset->create();
+            $existEmail = ResetPassword::find_by_email($email);
+            if(empty($existEmail)) {
+                $existEmail->email = $email;
+                $existEmail->verification_code = $verification_code;
+                $existEmail->created_at = date("Y-m-d H:i:s");
+                $existEmail->update();
+            } else {
+                $reset = new ResetPassword();
+                $reset->email = $email;
+                $reset->verification_code = $verification_code;
+                $reset->created_at = date("Y-m-d H:i:s");
+                $reset->create();
+            }
 
             $successreg = "Send verification code successful.";
-            redirect_to_root("reset-password.php?successreg=$successreg");
+            redirect_to_root("reset-password.php?successreg=$successreg&emailadd=$email");
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

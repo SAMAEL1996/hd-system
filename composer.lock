@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0eb4d683a76b9580da5809b7e7973b4d",
+    "content-hash": "18c0a73490048298135367d0f23ddb7d",
     "packages": [
+        {
+            "name": "convertapi/convertapi-php",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConvertAPI/convertapi-php.git",
+                "reference": "89d1600a19b3e541fd93abfe6788d8881f84ac6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConvertAPI/convertapi-php/zipball/89d1600a19b3e541fd93abfe6788d8881f84ac6a",
+                "reference": "89d1600a19b3e541fd93abfe6788d8881f84ac6a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ConvertApi\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ConvertAPI and contributors",
+                    "homepage": "https://github.com/ConvertAPI/convertapi-php/graphs/contributors"
+                }
+            ],
+            "description": "Convert API PHP Client",
+            "homepage": "https://github.com/ConvertAPI/convertapi-php",
+            "keywords": [
+                "api",
+                "client",
+                "conversion",
+                "convert"
+            ],
+            "support": {
+                "issues": "https://github.com/ConvertAPI/convertapi-php/issues",
+                "source": "https://github.com/ConvertAPI/convertapi-php/tree/v1.5.0"
+            },
+            "time": "2021-02-06T16:58:10+00:00"
+        },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.6.0",

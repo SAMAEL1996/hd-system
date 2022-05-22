@@ -40,6 +40,13 @@ class ComposerStaticInit25cd3c64415a4fd65a84c33b59c3d45e
                 0 => __DIR__ . '/..' . '/smalot/pdfparser/src',
             ),
         ),
+        'C' => 
+        array (
+            'ConvertApi\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/convertapi/convertapi-php/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (

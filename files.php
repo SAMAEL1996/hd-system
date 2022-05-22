@@ -41,10 +41,11 @@ $user = User::find_by_id($id);
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">Applicant ID</th>
                                 <th scope="col">Applicant Name</th>
+                                <th scope="col">Position Applied</th>
                                 <th scope="col">Date Applied</th>
                                 <th scope="col">File Uploaded</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,11 +61,30 @@ $user = User::find_by_id($id);
                                 ?>
                                 <tr>
                                     <td><?php echo $num ?></td>
-                                    <td><?php echo $cuser->iduser ?></td>
                                     <td><?php echo $cuser->name ?></td>
+                                    <td>
+                                        <?php
+                                        $job = Job::find_by_id($applicant->jobid);
+                                        echo $job->job;
+                                        ?>
+                                    </td>
                                     <td><?php echo date('F d, Y H:i:s', strtotime($applicant->created_at)); ?></td>
                                     <td>
-                                        <a href="uploads/<?php echo $applicant->file_name; ?>" download><?php echo $applicant->file_name ?></a>
+                                        <?php if (!empty($applicant->file_name)) { ?>
+                                            <a class="text-success">Occupy</a>
+                                        <?php } else { ?>
+                                            <a class="text-danger">Not Occupy</a>
+                                        <?php }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <form action="preview_pdf.php" method="POST" enctype="multipart/form-data">
+                                            <input type="text" name="pngName" value="<?php echo $cuser->name; ?>">
+                                            <input type="text" name="applicant_id" value="<?php echo $applicant->id; ?>">
+                                            <input type="text" name="formFile" value="<?php echo $applicant->file_name; ?>">
+                                            <button class="btn btn-success btn-sm"><a class="text-white" href="uploads/<?php echo $applicant->file_name; ?>" download>Download</a></button>
+                                            <button class="btn btn-info btn-sm" name="submit">Preview</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php

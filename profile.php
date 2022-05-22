@@ -29,7 +29,9 @@ $user = User::find_by_id($id);
         <div class="container light-grey padding-32 padding-large" style="display: block;">
             <div class="content" style="max-width: 600px;display: block; margin-left: auto; margin-right: auto;">
                 <h2 class="center" style="padding-top: 100px; text-align: center!important;">
-                    <b>Your Profile <?php echo $user->iduser; ?></b>
+                    <b>Your Profile
+                        <?php echo $user->usertypevalue[$user->usertype]?>
+                    </b>
                 </h2>
                 <form method="post" action="upload_application.php" enctype="multipart/form-data">
                     <div class="mb-3">

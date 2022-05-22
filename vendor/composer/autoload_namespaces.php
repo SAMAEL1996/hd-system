@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Smalot\\PdfParser\\' => array($vendorDir . '/smalot/pdfparser/src'),
+    'ConvertApi\\' => array($vendorDir . '/convertapi/convertapi-php/lib'),
 );
