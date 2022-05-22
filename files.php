@@ -79,9 +79,9 @@ $user = User::find_by_id($id);
                                     </td>
                                     <td>
                                         <form action="preview_pdf.php" method="POST" enctype="multipart/form-data">
-                                            <input type="text" name="pngName" value="<?php echo $cuser->name; ?>">
-                                            <input type="text" name="applicant_id" value="<?php echo $applicant->id; ?>">
-                                            <input type="text" name="formFile" value="<?php echo $applicant->file_name; ?>">
+                                            <input type="hidden" name="pngName" value="<?php echo $cuser->name; ?>">
+                                            <input type="hidden" name="applicant_id" value="<?php echo $applicant->id; ?>">
+                                            <input type="hidden" name="formFile" value="<?php echo $applicant->file_name; ?>">
                                             <button class="btn btn-success btn-sm"><a class="text-white" href="uploads/<?php echo $applicant->file_name; ?>" download>Download</a></button>
                                             <button class="btn btn-info btn-sm" name="submit">Preview</button>
                                         </form>
