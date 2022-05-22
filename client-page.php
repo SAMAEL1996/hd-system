@@ -99,7 +99,7 @@ require_once './includes/init.php';
                         <label class="btn btn-outline-dark btn-sm" for="btncheck2">Show Job Description</label>
                         <div id="job-description" style="display: none">
                             <p class="card-text"><?php echo nl2br($job->description); ?></p>
-                        </div>
+                        </div><br>
                         <?php if (empty($client->jobid)) { ?>
                             <a href="application-form.php?jobid=<?php echo $job->id; ?>" class="btn btn-outline-dark col-md-4 ms-4">Apply Now</a>
                         <?php } elseif ($client->jobid == $job->id) {

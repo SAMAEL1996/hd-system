@@ -41,12 +41,12 @@ $user = User::find_by_id($id);
             <!-- CONTENT -->
             <div id="content" style="float: left; width: 1116px; height:627px; overflow-y: auto">
                 <!-- CONTENT-TOP -->
-                <div class="p-3">
+                <div class="p-3" style="margin-left: auto; margin-right: auto;">
                     <h2 style="border-bottom: 1px solid gray; margin-bottom: 50px;">Applicant <?php echo $client->id; ?></h2>
                     <?php
                     $cuser = User::find_by_id($client->userid);
                     ?>
-                    <table class="table" style="width: 60%">
+                    <table class="table" style="width: 60%; margin-left: auto; margin-right: auto;">
                         <tr>
                             <td>Name</td>
                             <td>:</td>

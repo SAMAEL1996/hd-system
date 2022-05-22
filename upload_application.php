@@ -182,8 +182,8 @@ if (isset($submitjob)) {
     $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
     $jobDesc = $description;
 
-    $existJob = Job::find_by_job($job);
-    if (!empty($existJob)) {
+    $existJob = Job::find_by_job($job, $title);
+    if ($existJob == FALSE) {
         $jobOpen = new Job();
         $jobOpen->job = $job;
         $jobOpen->title = $title;

@@ -17,9 +17,9 @@ and open the template in the editor.
         <?php
         include './spinoffs/extract.php';
         ?>
-        <div style="width: 100%">
+        <div class="pt-3" style="width: 100%">
             <div class="d-flex justify-content-center align-items-center" style="height: 600px">
-                <img src="./public/images/card1.gif" style="width:50%">
+                <img src="./public/images/card1.gif" style="width:80%">
             </div>
         </div>
         <div class="py-5 mx-0" style="width: 100%">

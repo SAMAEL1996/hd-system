@@ -72,8 +72,8 @@ $user = User::find_by_id($id);
                 <!-- CONTENT-BOTTOM / FOOTER -->
                 <div class="p-3">
                     <div class="row pb-5">
-                        <div class="col-sm-4">
-                            <div class="card btn-background-slides" style="width: 18rem; border-right: 10px solid #232C27">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 12rem; border-right: 10px solid #232C27">
                                 <a href="employees.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($employees) ? '0' : $employees ?></h1>
@@ -82,8 +82,8 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card" style="width: 18rem; border-right: 10px solid #284854">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 12rem; border-right: 10px solid #284854">
                                 <a href="applicants.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($applicants) ? '0' : $applicants ?></h1>
@@ -92,8 +92,8 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card" style="width: 18rem; border-right: 10px solid #60747C">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 12rem; border-right: 10px solid #60747C">
                                 <a href="files.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($files) ? '0' : $files ?></h1>
@@ -102,12 +102,8 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="row pb-5">
-                        <div class="col-sm-4">
-                            <div class="card" style="width: 18rem; border-right: 10px solid #B2B8AA">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 12rem; border-right: 10px solid #B2B8AA">
                                 <a href="job_open.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($jobs) ? '0' : $jobs ?></h1>
@@ -116,12 +112,35 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="card" style="width: 18rem; border-right: 10px solid #D9A774">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 12rem; border-right: 10px solid #D9A774">
                                 <a href="history.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($rejected) ? '0' : $rejected ?></h1>
                                         <h4 class="card-subtitle mb-2 text-muted text-center">Rejected</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row pb-5">
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 24rem; border-right: 10px solid #232C27">
+                                <a href="employees.php">
+                                    <div class="card-body">
+                                        <h1 class="card-title text-center"><?php echo empty($employees) ? '0' : $employees ?></h1>
+                                        <h4 class="card-subtitle mb-2 text-muted text-center">Employees</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 24rem; border-right: 10px solid #284854">
+                                <a href="applicants.php">
+                                    <div class="card-body">
+                                        <h1 class="card-title text-center"><?php echo empty($applicants) ? '0' : $applicants ?></h1>
+                                        <h4 class="card-subtitle mb-2 text-muted text-center">Applicants</h4>
                                     </div>
                                 </a>
                             </div>
