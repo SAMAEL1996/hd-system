@@ -1,6 +1,6 @@
 <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand fs-3" href="index.php" style="font-family: 'Montserrat', sans-serif;">MINDWAVES</a>
+        <a class="navbar-brand fs-3" href="index.php" style="font-family: 'Montserrat', sans-serif; color: #FCF55F">MINDWAVES</a>
         <div class="" id="navbarNav" style="float: right">
             <ul class="navbar-nav">
                 <li class="nav-item">

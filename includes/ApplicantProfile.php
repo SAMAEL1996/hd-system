@@ -35,6 +35,16 @@ class ApplicantProfile {
         $query = self::find_by_sql("select * from " . self::$tablename . " where usertype not in ( 20 )");
         return $query;
     }
+    
+    public static function find_all_latest() {
+        $query = self::find_by_sql("select * from " . self::$tablename . " where not status=40 and not status=100 order by created_at");
+        return $query;
+    }
+    
+    public static function find_all_hired() {
+        $query = self::find_by_sql("select * from " . self::$tablename . " where status=40 order by created_at");
+        return $query;
+    }
 
     public static function find_by_id($id = 0) {
         global $database;
@@ -103,17 +113,6 @@ class ApplicantProfile {
     public static function find_all_inactive_status() {
         global $database;
         $sql = "SELECT * FROM " . self::$tablename . " WHERE status = 100";
-        $query = $database->query($sql);
-        $query_in_array_form = array();
-        while ($row = mysqli_fetch_array($query)) {
-            $query_in_array_form[] = self::instantiate($row);
-        }
-        return $query_in_array_form;
-    }
-    
-    public static function find_all_hired() {
-        global $database;
-        $sql = "SELECT * FROM " . self::$tablename . " WHERE status = 40";
         $query = $database->query($sql);
         $query_in_array_form = array();
         while ($row = mysqli_fetch_array($query)) {

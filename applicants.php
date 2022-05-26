@@ -40,7 +40,7 @@ $user = User::find_by_id($id);
                     <h1 style="border-bottom: 1px solid gray; margin-bottom: 50px">Applicants</h1>
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #fdfd96">
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone Number</th>

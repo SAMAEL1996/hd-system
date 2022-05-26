@@ -50,7 +50,7 @@ $user = User::find_by_id($id);
                     </div>
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #fdfd96">
                                 <th scope="col">No.</th>
                                 <th scope="col">Date created</th>
                                 <th scope="col">Job Title</th>

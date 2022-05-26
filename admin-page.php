@@ -16,10 +16,16 @@ $user = User::find_by_id($id);
         include './spinoffs/head.php';
         ?>
         <style>
-            .card {
+            @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+
+            table {
+                --bs-body-font-family: 'PT Sans Narrow', sans-serif;
+            }
+
+            .block-content {
                 display: block;
             }
-            .card h1 {
+            .block-content h1 {
                 color: black;
             }
             a:hover::before,
@@ -72,8 +78,8 @@ $user = User::find_by_id($id);
                 <!-- CONTENT-BOTTOM / FOOTER -->
                 <div class="p-3">
                     <div class="row pb-5">
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 12rem; border-right: 10px solid #232C27">
+                        <div class="col-sm-4">
+                            <div class="card block-content" style="width: 21rem; border-right: 10px solid #232C27">
                                 <a href="employees.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($employees) ? '0' : $employees ?></h1>
@@ -82,8 +88,8 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 12rem; border-right: 10px solid #284854">
+                        <div class="col-sm-4">
+                            <div class="card block-content" style="width: 21rem; border-right: 10px solid #284854">
                                 <a href="applicants.php">
                                     <div class="card-body">
                                         <h1 class="card-title text-center"><?php echo empty($applicants) ? '0' : $applicants ?></h1>
@@ -92,57 +98,80 @@ $user = User::find_by_id($id);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 12rem; border-right: 10px solid #60747C">
-                                <a href="files.php">
-                                    <div class="card-body">
-                                        <h1 class="card-title text-center"><?php echo empty($files) ? '0' : $files ?></h1>
-                                        <h4 class="card-subtitle mb-2 text-muted text-center">Files</h4>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 12rem; border-right: 10px solid #B2B8AA">
-                                <a href="job_open.php">
-                                    <div class="card-body">
-                                        <h1 class="card-title text-center"><?php echo empty($jobs) ? '0' : $jobs ?></h1>
-                                        <h4 class="card-subtitle mb-2 text-muted text-center">Job Open</h4>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 12rem; border-right: 10px solid #D9A774">
+                        <div class="col-sm-4">
+                            <div class="card block-content" style="width: 21rem; border-right: 10px solid #D9A774">
                                 <a href="history.php">
                                     <div class="card-body">
-                                        <h1 class="card-title text-center"><?php echo empty($rejected) ? '0' : $rejected ?></h1>
-                                        <h4 class="card-subtitle mb-2 text-muted text-center">Rejected</h4>
+                                        <h1 class="card-title text-center"><?php echo empty($jobs) ? '0' : $jobs ?></h1>
+                                        <h4 class="card-subtitle mb-2 text-muted text-center">Jobs</h4>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+                </div>
+
+                <?php
+                $latestapplicants = ApplicantProfile::find_all_latest();
+                $latestemployees = ApplicantProfile::find_all_hired();
+                ?>
+                <div class="p-3">
                     <div class="row pb-5">
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 24rem; border-right: 10px solid #232C27">
-                                <a href="employees.php">
-                                    <div class="card-body">
-                                        <h1 class="card-title text-center"><?php echo empty($employees) ? '0' : $employees ?></h1>
-                                        <h4 class="card-subtitle mb-2 text-muted text-center">Employees</h4>
-                                    </div>
-                                </a>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #fdfd96">
+                                    Latest Applicants
+                                </div>
+                                <table class="table" style="margin-bottom: 0">
+                                    <thead class="text-uppercase text-center text-muted">
+                                        <tr>
+                                            <th class="fw-bolder" style="border-right: #e5e4e2 1px ridge">Name</th>
+                                            <th class="fw-bolder" style="border-right: #e5e4e2 1px ridge">Email</th>
+                                            <th class="fw-bolder">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fst-italic">
+                                        <?php
+                                        foreach ($latestapplicants as $latestapplicant) {
+                                            $user = User::find_by_id($latestapplicant->userid);
+                                        ?>
+                                            <tr style="background-color: #e5e4e2">
+                                                <td><small><a href="view-applicant.php?clientid=<?php echo $latestapplicant->id; ?>"><?php echo $user->name; ?></a></small></td>
+                                                <td class="text-center"><small><?php echo $user->emailadd; ?></small></td>
+                                                <td class="text-center"><small><?php echo time_elapsed_string($latestapplicant->created_at); ?></small></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="card" style="width: 24rem; border-right: 10px solid #284854">
-                                <a href="applicants.php">
-                                    <div class="card-body">
-                                        <h1 class="card-title text-center"><?php echo empty($applicants) ? '0' : $applicants ?></h1>
-                                        <h4 class="card-subtitle mb-2 text-muted text-center">Applicants</h4>
-                                    </div>
-                                </a>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #fdfd96">
+                                    Latest Hired Employees
+                                </div>
+                                <table class="table" style="margin-bottom: 0">
+                                    <thead class="text-uppercase text-center text-muted">
+                                        <tr>
+                                            <th class="fw-bolder" style="border-right: #e5e4e2 1px ridge">Name</th>
+                                            <th class="fw-bolder" style="border-right: #e5e4e2 1px ridge">Position</th>
+                                            <th class="fw-bolder">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fst-italic">
+                                        <?php
+                                        foreach ($latestemployees as $latestemployee) {
+                                            $user = User::find_by_id($latestemployee->userid);
+                                            $job = Job::find_by_id($latestemployee->jobid);
+                                        ?>
+                                            <tr style="background-color: #e5e4e2">
+                                                <td><small><a href="view-applicant.php?clientid=<?php echo $latestemployee->id; ?>"><?php echo $user->name; ?></a></small></td>
+                                                <td class="text-center"><small><?php echo $job->job; ?></small></td>
+                                                <td class="text-center"><small><?php echo time_elapsed_string($latestapplicant->created_at); ?></small></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-3" style="font-family: 'Montserrat', sans-serif;" href="client-page.php">MINDWAVES</a>
+        <a class="navbar-brand fs-3" style="font-family: 'Montserrat', sans-serif; color: #FCF55F" href="client-page.php">MINDWAVES</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

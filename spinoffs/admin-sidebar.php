@@ -1,6 +1,7 @@
 <style>
     .sidebar {
         height: 100%;
+        
     }
     ul li {
         display: block;
@@ -21,7 +22,7 @@
 </style>
 
 <div id="wrapper">
-    <div class="sidebar" style="width: 250px; padding: 0; height: 100% ">
+    <div class="sidebar" style="width: 250px; padding: 0; height: 100%; ">
         <ul class="ps-0">
             <li><a href="admin-page.php" style="text-decoration: none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
             <li><a href="employees.php" style="text-decoration: none"><i class="fa-solid fa-circle-user"></i> Employees</a></li>

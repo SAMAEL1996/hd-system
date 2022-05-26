@@ -39,7 +39,7 @@ $user = User::find_by_id($id);
                     <h1 style="border-bottom: 1px solid gray; margin-bottom: 50px">Files</h1>
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #fdfd96">
                                 <th scope="col">No.</th>
                                 <th scope="col">Applicant Name</th>
                                 <th scope="col">Position Applied</th>
