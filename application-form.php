@@ -58,7 +58,7 @@ require_once './includes/init.php';
                                     <input type="text" name="user_address" class="form-control" placeholder="Home Address" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="tel" class="form-control" placeholder="Phone Number (format: 09********)" pattern="[0-9]{11}" onkeyup="numbersOnly(this)" required>
+                                    <input type="tel" class="form-control" name="user_contact" placeholder="Phone Number (format: 09********)" pattern="[0-9]{11}" onkeyup="numbersOnly(this)" required>
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-check-inline">
