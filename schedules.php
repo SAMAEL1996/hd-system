@@ -55,15 +55,15 @@ $user = User::find_by_id($id);
                             }
 
                             foreach ($scheds as $sched) {
-                                $cuser = User::find_by_id($sched->clientid);
                                 $app = ApplicantProfile::find_by_id($sched->clientid);
+                                $cuser = User::find_by_id($app->userid);
                                 ?>
                                 <tr>
                                     <td><?php echo $cuser->name ?></td>
                                     <td><?php echo $cuser->emailadd ?></td>
                                     <td><?php echo $app->statusvalue[$app->status]; ?></td>
                                     <td>
-                                        <?php echo date("F j, Y, g:i a", strtotime($sched->sched_date)); ?>
+                                        <?php echo date("F j, Y", strtotime($sched->sched_date)); ?>
                                     </td>
                                 </tr>
                             <?php } ?>

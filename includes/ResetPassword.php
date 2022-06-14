@@ -108,7 +108,7 @@ class ResetPassword {
         foreach ($attributes as $keys => $values) {
             $attribute_pairs[] = "{$keys}='{$values}'";
         }
-        $sql = "UPDATE " . self::$tablename . " SET " . join(",", $attribute_pairs) . " WHERE userid='" . $database->escape_value($this->userid) . "';";
+        $sql = "UPDATE " . self::$tablename . " SET " . join(",", $attribute_pairs) . " WHERE id='" . $database->escape_value($this->id) . "';";
         if ($database->query($sql)) {
             return TRUE;
         } else {

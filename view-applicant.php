@@ -81,7 +81,13 @@ $user = User::find_by_id($id);
                             <td>File Uploaded</td>
                             <td>:</td>
                             <td>
-                                <a href="uploads/<?php echo $client->file_name; ?>" download><?php echo $client->file_name ?></a>
+                                <form action="preview_pdf.php" method="POST" enctype="multipart/form-data">
+                                    <a><?php echo $client->file_name ?></a>
+                                    <input type="hidden" name="pngName" value="<?php echo $cuser->name; ?>">
+                                    <input type="hidden" name="applicant_id" value="<?php echo $client->id; ?>">
+                                    <input type="hidden" name="formFile" value="<?php echo $client->file_name; ?>">
+                                    <button class="btn btn-info btn-sm" name="submit">Preview</button>
+                                </form>
                             </td>
                         </tr>
                         <tr>

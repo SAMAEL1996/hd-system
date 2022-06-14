@@ -46,7 +46,7 @@ $user = User::find_by_id($id);
                 <div class="p-3">
                     <h2 style="border-bottom: 1px solid gray; margin-bottom: 50px;">Schedule Interview</h2>
                     <div class="d-flex justify-content-center" style="width: 100%">
-                        <form method="post">
+                        <form method="post" action="">
                             <div class="mb-3">
                                 <input type="text" class="form-control" value="<?php echo $cuser->name; ?>" readonly="">
                                 <input type="hidden" name="clientid" class="form-control" value="<?php echo $client->id; ?>" readonly="">
@@ -59,7 +59,7 @@ $user = User::find_by_id($id);
                                 <?php
                                 date_default_timezone_set('Asia/Manila');
                                 ?>
-                                <input type="datetime-local" name="sched_date" class="form-control">
+                                <input type="date" name="sched_date" class="form-control">
                             </div>
                             <div class="mb-3 d-flex justify-content-center align-items-center">
                                 <input type="submit" name="submitschedule" value="Submit Schedule" class="btn btn-outline-dark">
@@ -69,7 +69,6 @@ $user = User::find_by_id($id);
                         if ($status == "initial") {
                             $submitschedule = filter_input(INPUT_POST, "submitschedule", FILTER_SANITIZE_STRING);
                             if (isset($submitschedule)) {
-                                $clientid = filter_input(INPUT_POST, "clientid", FILTER_VALIDATE_INT);
                                 $action = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
                                 $sched_time = $_POST['sched_date'];
 
@@ -90,7 +89,6 @@ $user = User::find_by_id($id);
                         } elseif ($status == "final") {
                             $submitschedule = filter_input(INPUT_POST, "submitschedule", FILTER_SANITIZE_STRING);
                             if (isset($submitschedule)) {
-                                $clientid = filter_input(INPUT_POST, "clientid", FILTER_VALIDATE_INT);
                                 $action = filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING);
                                 $sched_time = $_POST['sched_date'];
 
@@ -120,17 +118,13 @@ $user = User::find_by_id($id);
 
         </div>
         <script>
-            var today = new Date().toISOString().slice(0, 16);
-            document.getElementsByName("sched_date")[0].min = today;
-//            $(function () {
-//                var dtToday = new Date();
-//
-//                var month = dtToday.getMonth() + 1;
-//                var day = dtToday.getDate();
-//                var year = dtToday.getFullYear();
-//
-//                $('#txtDate').attr('min', maxDate);
-//            });
+//            var today = new Date().toISOString().split("T")[0];
+//            document.getElementsByName("sched_date").max = today;
+            $(function(){
+                $('[type="date"]').prop('min', function(){
+                    return new Date().toJSON().split('T')[0];
+                });
+            });
             </script>
     </body>
 </html>

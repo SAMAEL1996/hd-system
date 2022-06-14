@@ -194,7 +194,7 @@ if (isset($submitjob)) {
             redirect_to_root("job_open.php");
         }
     } else {
-        $error = "Input job already exist!";
+        $error = "Job position's already exist!";
         redirect_to_root("form.php?error=$error");
     }
 }

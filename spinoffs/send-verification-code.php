@@ -65,7 +65,7 @@ if (isset($sendcode)) {
             // echo 'Message has been sent';
             // insert in users table
             $existEmail = ResetPassword::find_by_email($email);
-            if(empty($existEmail)) {
+            if(!empty($existEmail)) {
                 $existEmail->email = $email;
                 $existEmail->verification_code = $verification_code;
                 $existEmail->created_at = date("Y-m-d H:i:s");

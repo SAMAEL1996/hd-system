@@ -47,11 +47,11 @@ require_once './includes/init.php';
                     <?php
                 } elseif ($client->status == 20) {
                     ?>
-                    <span class="text-primary ms-5">FOR INITIAL INTERVIEW</span> @ <?php echo date("F j, Y, g:i a", strtotime($sched->sched_date)); ?>
+                    <span class="text-primary ms-5">FOR INITIAL INTERVIEW</span> @ <?php echo date("F j, Y", strtotime($sched->sched_date)); ?>
                     <?php
                 } elseif ($client->status == 30) {
                     ?>
-                    <span class="text-primary ms-5">FOR FINAL INTERVIEW</span> @ <?php echo date("F j, Y, g:i a", strtotime($sched->sched_date)); ?>
+                    <span class="text-primary ms-5">FOR FINAL INTERVIEW</span> @ <?php echo date("F j, Y", strtotime($sched->sched_date)); ?>
                     <?php
                 } elseif ($client->status == 40) {
                     ?>
